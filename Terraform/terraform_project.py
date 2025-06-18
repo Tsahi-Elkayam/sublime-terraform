@@ -7,6 +7,7 @@ import os
 import glob
 import json
 import sublime
+import sublime_plugin
 from .terraform_settings import get_settings
 
 class TerraformProject:
