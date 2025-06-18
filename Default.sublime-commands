@@ -1,0 +1,90 @@
+[
+    {
+        "caption": "Terraform: Initialize",
+        "command": "terraform_init"
+    },
+    {
+        "caption": "Terraform: Initialize Current Folder",
+        "command": "terraform_init_current_folder"
+    },
+    {
+        "caption": "Terraform: Validate",
+        "command": "terraform_validate"
+    },
+    {
+        "caption": "Terraform: Plan",
+        "command": "terraform_plan"
+    },
+    {
+        "caption": "Terraform: Apply",
+        "command": "terraform_apply"
+    },
+    {
+        "caption": "Terraform: Destroy",
+        "command": "terraform_destroy"
+    },
+    {
+        "caption": "Terraform: Format Document",
+        "command": "terraform_format"
+    },
+    {
+        "caption": "Terraform: Show Output",
+        "command": "terraform_output"
+    },
+    {
+        "caption": "Terraform: Refresh State",
+        "command": "terraform_refresh"
+    },
+    {
+        "caption": "Terraform: Show State",
+        "command": "terraform_show"
+    },
+    {
+        "caption": "Terraform: Show Modules",
+        "command": "terraform_show_modules"
+    },
+    {
+        "caption": "Terraform: Show Providers",
+        "command": "terraform_show_providers"
+    },
+    {
+        "caption": "Terraform: Show Resources",
+        "command": "terraform_show_resources"
+    },
+    {
+        "caption": "Terraform Cloud: Login",
+        "command": "terraform_cloud_login"
+    },
+    {
+        "caption": "Terraform Cloud: Show Workspaces",
+        "command": "terraform_cloud_show_workspaces"
+    },
+    {
+        "caption": "Terraform Cloud: Show Runs",
+        "command": "terraform_cloud_show_runs"
+    },
+    {
+        "caption": "Terraform Cloud: Logout",
+        "command": "terraform_cloud_logout"
+    },
+    {
+        "caption": "Terraform: Project Status",
+        "command": "terraform_project_status"
+    },
+    {
+        "caption": "Terraform: Refresh Projects",
+        "command": "terraform_project_refresh"
+    },
+    {
+        "caption": "Terraform: Switch Project",
+        "command": "terraform_project_switch"
+    },
+    {
+        "caption": "Preferences: Terraform Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/Terraform/Terraform.sublime-settings",
+            "default": "{\n\t$0\n}\n"
+        }
+    }
+]

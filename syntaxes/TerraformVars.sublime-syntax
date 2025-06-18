@@ -1,0 +1,155 @@
+%YAML 1.2
+---
+name: Terraform Variables
+file_extensions:
+  - tfvars
+  - tfvars.json
+scope: source.terraform.vars
+version: 2
+
+variables:
+  identifier: '[a-zA-Z_][a-zA-Z0-9_-]*'
+
+contexts:
+  main:
+    - include: comments
+    - include: assignments
+    - include: expressions
+    
+  comments:
+    - match: '#.*$'
+      scope: comment.line.number-sign.terraform
+    - match: '//'
+      scope: punctuation.definition.comment.terraform
+      push:
+        - meta_scope: comment.line.double-slash.terraform
+        - match: $\n?
+          pop: true
+    - match: '/\*'
+      scope: punctuation.definition.comment.begin.terraform
+      push:
+        - meta_scope: comment.block.terraform
+        - match: '\*/'
+          scope: punctuation.definition.comment.end.terraform
+          pop: true
+          
+  assignments:
+    - match: '({{identifier}})\s*(=)'
+      captures:
+        1: variable.other.terraform
+        2: keyword.operator.assignment.terraform
+      push: assignment_value
+      
+  assignment_value:
+    - include: expressions
+    - match: '$'
+      pop: true
+      
+  expressions:
+    - include: primitives
+    - include: strings
+    - include: heredocs
+    - include: collections
+    - include: functions
+    
+  primitives:
+    - match: '\b(true|false)\b'
+      scope: constant.language.boolean.terraform
+    - match: '\b(null)\b'
+      scope: constant.language.null.terraform
+    - match: '\b\d+(\.\d+)?([eE][+-]?\d+)?\b'
+      scope: constant.numeric.terraform
+      
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push: string_double
+    - match: "'"
+      scope: punctuation.definition.string.begin.terraform
+      push: string_single
+      
+  string_double:
+    - meta_scope: string.quoted.double.terraform
+    - match: '\$\{'
+      scope: punctuation.section.interpolation.begin.terraform
+      push: string_interpolation
+    - match: '\\'
+      scope: constant.character.escape.terraform
+      push: string_escape
+    - match: '"'
+      scope: punctuation.definition.string.end.terraform
+      pop: true
+      
+  string_single:
+    - meta_scope: string.quoted.single.terraform
+    - match: "'"
+      scope: punctuation.definition.string.end.terraform
+      pop: true
+      
+  string_interpolation:
+    - meta_scope: meta.interpolation.terraform
+    - match: '\}'
+      scope: punctuation.section.interpolation.end.terraform
+      pop: true
+    - include: expressions
+    
+  string_escape:
+    - match: '[nrt"\\]'
+      scope: constant.character.escape.terraform
+      pop: true
+    - match: 'u[0-9a-fA-F]{4}'
+      scope: constant.character.escape.unicode.terraform
+      pop: true
+    - match: 'U[0-9a-fA-F]{8}'
+      scope: constant.character.escape.unicode.terraform
+      pop: true
+    - match: '.'
+      scope: invalid.illegal.escape.terraform
+      pop: true
+      
+  heredocs:
+    - match: '<<-?\s*([A-Z_]+)\s*$'
+      captures:
+        1: keyword.operator.heredoc.terraform
+      push:
+        - meta_content_scope: string.unquoted.heredoc.terraform
+        - match: '^\s*\1\s*$'
+          scope: keyword.operator.heredoc.terraform
+          pop: true
+          
+  collections:
+    - match: '\['
+      scope: punctuation.section.brackets.begin.terraform
+      push:
+        - match: '\]'
+          scope: punctuation.section.brackets.end.terraform
+          pop: true
+        - match: ','
+          scope: punctuation.separator.terraform
+        - include: expressions
+    - match: '\{'
+      scope: punctuation.section.braces.begin.terraform
+      push:
+        - match: '\}'
+          scope: punctuation.section.braces.end.terraform
+          pop: true
+        - match: ','
+          scope: punctuation.separator.terraform
+        - match: '='
+          scope: keyword.operator.assignment.terraform
+        - match: ':'
+          scope: punctuation.separator.key-value.terraform
+        - include: expressions
+          
+  functions:
+    - match: '\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(\()'
+      captures:
+        1: support.function.terraform
+        2: punctuation.section.parens.begin.terraform
+      push:
+        - match: '\)'
+          scope: punctuation.section.parens.end.terraform
+          pop: true
+        - match: ','
+          scope: punctuation.separator.terraform
+        - include: expressions

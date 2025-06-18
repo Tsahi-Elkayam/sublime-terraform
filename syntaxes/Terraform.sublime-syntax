@@ -1,0 +1,471 @@
+%YAML 1.2
+---
+name: Terraform
+file_extensions:
+  - tf
+  - tfstack.hcl
+  - tfdeploy.hcl
+scope: source.terraform
+version: 2
+
+variables:
+  identifier: '[a-zA-Z_][a-zA-Z0-9_-]*'
+  
+contexts:
+  main:
+    - include: comments
+    - include: blocks
+    - include: expressions
+    
+  comments:
+    - match: '#.*$'
+      scope: comment.line.number-sign.terraform
+    - match: '//'
+      scope: punctuation.definition.comment.terraform
+      push:
+        - meta_scope: comment.line.double-slash.terraform
+        - match: $\n?
+          pop: true
+    - match: '/\*'
+      scope: punctuation.definition.comment.begin.terraform
+      push:
+        - meta_scope: comment.block.terraform
+        - match: '\*/'
+          scope: punctuation.definition.comment.end.terraform
+          pop: true
+          
+  blocks:
+    - match: '\b(locals)\b'
+      scope: storage.type.locals.terraform
+      push: locals_block
+    - match: '\b(variable)\b'
+      scope: storage.type.variable.terraform
+      push: variable_block
+    - match: '\b(output)\b'
+      scope: storage.type.output.terraform
+      push: output_block
+    - match: '\b(resource)\b'
+      scope: storage.type.resource.terraform
+      push: resource_block
+    - match: '\b(data)\b'
+      scope: storage.type.data.terraform
+      push: data_block
+    - match: '\b(module)\b'
+      scope: storage.type.module.terraform
+      push: module_block
+    - match: '\b(provider)\b'
+      scope: storage.type.provider.terraform
+      push: provider_block
+    - match: '\b(terraform)\b'
+      scope: storage.type.terraform.terraform
+      push: terraform_block
+    - match: '\b(moved)\b'
+      scope: storage.type.moved.terraform
+      push: moved_block
+    - match: '\b(import)\b'
+      scope: storage.type.import.terraform
+      push: import_block
+    - match: '\b(check)\b'
+      scope: storage.type.check.terraform
+      push: check_block
+    - match: '\b(component)\b'
+      scope: storage.type.component.terraform
+      push: component_block
+      
+  resource_block:
+    - meta_scope: meta.block.resource.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: entity.name.type.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: resource_block_body
+    - include: main
+    
+  resource_block_body:
+    - meta_scope: meta.block.resource.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  data_block:
+    - meta_scope: meta.block.data.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: entity.name.type.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: data_block_body
+    - include: main
+    
+  data_block_body:
+    - meta_scope: meta.block.data.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  variable_block:
+    - meta_scope: meta.block.variable.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: variable.other.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: variable_block_body
+    - include: main
+    
+  variable_block_body:
+    - meta_scope: meta.block.variable.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  output_block:
+    - meta_scope: meta.block.output.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: variable.other.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: output_block_body
+    - include: main
+    
+  output_block_body:
+    - meta_scope: meta.block.output.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  module_block:
+    - meta_scope: meta.block.module.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: entity.name.module.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: module_block_body
+    - include: main
+    
+  module_block_body:
+    - meta_scope: meta.block.module.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  provider_block:
+    - meta_scope: meta.block.provider.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: support.type.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: provider_block_body
+    - include: main
+    
+  provider_block_body:
+    - meta_scope: meta.block.provider.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  terraform_block:
+    - meta_scope: meta.block.terraform.terraform
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: terraform_block_body
+    - include: main
+    
+  terraform_block_body:
+    - meta_scope: meta.block.terraform.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - match: '\b(required_version|required_providers|backend|experiments|provider_meta)\b'
+      scope: storage.type.terraform
+    - include: block_body_common
+    
+  locals_block:
+    - meta_scope: meta.block.locals.terraform
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: locals_block_body
+    - include: main
+    
+  locals_block_body:
+    - meta_scope: meta.block.locals.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  moved_block:
+    - meta_scope: meta.block.moved.terraform
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: moved_block_body
+    - include: main
+    
+  moved_block_body:
+    - meta_scope: meta.block.moved.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  import_block:
+    - meta_scope: meta.block.import.terraform
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: import_block_body
+    - include: main
+    
+  import_block_body:
+    - meta_scope: meta.block.import.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  check_block:
+    - meta_scope: meta.block.check.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: entity.name.check.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: check_block_body
+    - include: main
+    
+  check_block_body:
+    - meta_scope: meta.block.check.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  component_block:
+    - meta_scope: meta.block.component.terraform
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push:
+        - meta_scope: string.quoted.double.terraform
+        - meta_content_scope: entity.name.component.terraform
+        - match: '"'
+          scope: punctuation.definition.string.end.terraform
+          pop: true
+    - match: '\{'
+      scope: punctuation.section.block.begin.terraform
+      set: component_block_body
+    - include: main
+    
+  component_block_body:
+    - meta_scope: meta.block.component.body.terraform
+    - match: '\}'
+      scope: punctuation.section.block.end.terraform
+      pop: 2
+    - include: block_body_common
+    
+  block_body_common:
+    - include: comments
+    - include: attributes
+    - include: blocks
+    - include: dynamic_blocks
+    - include: expressions
+    
+  attributes:
+    - match: '({{identifier}})\s*(=)'
+      captures:
+        1: variable.other.member.terraform
+        2: keyword.operator.assignment.terraform
+      push: attribute_value
+      
+  attribute_value:
+    - include: expressions
+    - match: '$'
+      pop: true
+      
+  dynamic_blocks:
+    - match: '\b(dynamic)\b'
+      scope: storage.type.dynamic.terraform
+      push:
+        - match: '"'
+          scope: punctuation.definition.string.begin.terraform
+          push:
+            - meta_scope: string.quoted.double.terraform
+            - match: '"'
+              scope: punctuation.definition.string.end.terraform
+              pop: true
+        - match: '\{'
+          scope: punctuation.section.block.begin.terraform
+          push:
+            - match: '\}'
+              scope: punctuation.section.block.end.terraform
+              pop: 2
+            - match: '\b(for_each|content|iterator)\b'
+              scope: storage.type.terraform
+            - include: block_body_common
+            
+  expressions:
+    - include: primitives
+    - include: operators
+    - include: functions
+    - include: references
+    - include: strings
+    - include: heredocs
+    - include: collections
+    
+  primitives:
+    - match: '\b(true|false)\b'
+      scope: constant.language.boolean.terraform
+    - match: '\b(null)\b'
+      scope: constant.language.null.terraform
+    - match: '\b\d+(\.\d+)?([eE][+-]?\d+)?\b'
+      scope: constant.numeric.terraform
+      
+  operators:
+    - match: '\?|:'
+      scope: keyword.operator.conditional.terraform
+    - match: '==|!=|<=|>=|<|>'
+      scope: keyword.operator.comparison.terraform
+    - match: '&&|\|\||!'
+      scope: keyword.operator.logical.terraform
+    - match: '\+|-|\*|/|%'
+      scope: keyword.operator.arithmetic.terraform
+    - match: '='
+      scope: keyword.operator.assignment.terraform
+    - match: '\.\.\.'
+      scope: keyword.operator.splat.terraform
+      
+  functions:
+    - match: '\b(abs|ceil|floor|log|max|min|pow|signum|chomp|format|formatlist|indent|join|lower|regex|regexall|replace|split|strrev|substr|title|trim|trimprefix|trimsuffix|trimspace|upper|alltrue|anytrue|chunklist|coalesce|coalescelist|compact|concat|contains|distinct|element|flatten|index|keys|length|list|lookup|map|matchkeys|merge|one|range|reverse|setintersection|setproduct|setsubtract|setunion|slice|sort|sum|transpose|values|zipmap|base64decode|base64encode|base64gzip|csvdecode|jsondecode|jsonencode|textdecodebase64|textencodebase64|urlencode|yamldecode|yamlencode|abspath|dirname|pathexpand|basename|file|fileexists|fileset|filebase64|templatefile|formatdate|timeadd|timestamp|base64sha256|base64sha512|bcrypt|filebase64sha256|filebase64sha512|filemd5|filesha1|filesha256|filesha512|md5|rsadecrypt|sha1|sha256|sha512|uuid|uuidv5|cidrhost|cidrnetmask|cidrsubnet|cidrsubnets|can|try|tobool|tolist|tomap|tonumber|toset|tostring|type)\b'
+      scope: support.function.builtin.terraform
+      
+  references:
+    - match: '\b(var|local|module|data|resource|terraform|path|each|count|self)\b'
+      scope: variable.language.terraform
+    - match: '(\.)([a-zA-Z_][a-zA-Z0-9_-]*)'
+      captures:
+        1: punctuation.accessor.terraform
+        2: variable.other.member.terraform
+        
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.terraform
+      push: string_double
+    - match: "'"
+      scope: punctuation.definition.string.begin.terraform
+      push: string_single
+      
+  string_double:
+    - meta_scope: string.quoted.double.terraform
+    - match: '\$\{'
+      scope: punctuation.section.interpolation.begin.terraform
+      push: string_interpolation
+    - match: '\\'
+      scope: constant.character.escape.terraform
+      push: string_escape
+    - match: '"'
+      scope: punctuation.definition.string.end.terraform
+      pop: true
+      
+  string_single:
+    - meta_scope: string.quoted.single.terraform
+    - match: "'"
+      scope: punctuation.definition.string.end.terraform
+      pop: true
+      
+  string_interpolation:
+    - meta_scope: meta.interpolation.terraform
+    - match: '\}'
+      scope: punctuation.section.interpolation.end.terraform
+      pop: true
+    - include: expressions
+    
+  string_escape:
+    - match: '[nrt"\\]'
+      scope: constant.character.escape.terraform
+      pop: true
+    - match: 'u[0-9a-fA-F]{4}'
+      scope: constant.character.escape.unicode.terraform
+      pop: true
+    - match: 'U[0-9a-fA-F]{8}'
+      scope: constant.character.escape.unicode.terraform
+      pop: true
+    - match: '.'
+      scope: invalid.illegal.escape.terraform
+      pop: true
+      
+  heredocs:
+    - match: '<<-?\s*([A-Z_]+)\s*$'
+      captures:
+        1: keyword.operator.heredoc.terraform
+      push:
+        - meta_content_scope: string.unquoted.heredoc.terraform
+        - match: '^\s*\1\s*$'
+          scope: keyword.operator.heredoc.terraform
+          pop: true
+          
+  collections:
+    - match: '\['
+      scope: punctuation.section.brackets.begin.terraform
+      push:
+        - match: '\]'
+          scope: punctuation.section.brackets.end.terraform
+          pop: true
+        - match: ','
+          scope: punctuation.separator.terraform
+        - include: expressions
+    - match: '\{'
+      scope: punctuation.section.braces.begin.terraform
+      push:
+        - match: '\}'
+          scope: punctuation.section.braces.end.terraform
+          pop: true
+        - match: ','
+          scope: punctuation.separator.terraform
+        - match: '='
+          scope: keyword.operator.assignment.terraform
+        - match: ':'
+          scope: punctuation.separator.key-value.terraform
+        - include: expressions

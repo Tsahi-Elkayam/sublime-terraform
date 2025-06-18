@@ -1,0 +1,51 @@
+Terraform Plugin v1.0.0
+=======================
+
+🎉 Initial Release!
+
+This is the first release of the Terraform plugin for Sublime Text 4,
+bringing powerful Terraform development features to your favorite editor.
+
+✨ Features
+-----------
+
+• Full Language Server Protocol support via terraform-ls
+• IntelliSense for providers, resources, and functions  
+• Syntax highlighting for HCL2 and Terraform Stacks
+• Code formatting with terraform fmt
+• Integrated Terraform commands
+• Module and provider exploration
+• Terraform Cloud integration
+• Project detection and management
+• Rich code snippets
+• And much more!
+
+🔧 Requirements
+---------------
+
+• Sublime Text 4 (Build 4000+)
+• LSP Package
+• Terraform CLI
+
+📚 Getting Started
+------------------
+
+1. Install the LSP package if you haven't already
+2. Open a Terraform project (.tf files)
+3. Start coding with full IntelliSense support!
+
+The plugin will automatically download terraform-ls on first use.
+
+⚙️ Configuration
+----------------
+
+Access settings via:
+Preferences → Package Settings → Terraform → Settings
+
+🐛 Feedback
+-----------
+
+Please report any issues or feature requests at:
+https://github.com/yourusername/sublime-terraform/issues
+
+Thank you for using the Terraform plugin!

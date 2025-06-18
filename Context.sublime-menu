@@ -1,0 +1,71 @@
+[
+    {
+        "caption": "-"
+    },
+    {
+        "caption": "Terraform",
+        "children": [
+            {
+                "caption": "Format",
+                "command": "terraform_format",
+                "context": [
+                    {
+                        "key": "selector",
+                        "operator": "equal",
+                        "operand": "source.terraform"
+                    }
+                ]
+            },
+            {
+                "caption": "Validate",
+                "command": "terraform_validate",
+                "context": [
+                    {
+                        "key": "selector",
+                        "operator": "equal",
+                        "operand": "source.terraform"
+                    }
+                ]
+            },
+            {
+                "caption": "-"
+            },
+            {
+                "caption": "Go to Definition",
+                "command": "lsp_symbol_definition",
+                "context": [
+                    {
+                        "key": "selector",
+                        "operator": "equal",
+                        "operand": "source.terraform"
+                    }
+                ]
+            },
+            {
+                "caption": "Find References",
+                "command": "lsp_symbol_references",
+                "context": [
+                    {
+                        "key": "selector",
+                        "operator": "equal",
+                        "operand": "source.terraform"
+                    }
+                ]
+            },
+            {
+                "caption": "-"
+            },
+            {
+                "caption": "Show Module Info",
+                "command": "terraform_show_modules",
+                "context": [
+                    {
+                        "key": "selector",
+                        "operator": "equal",
+                        "operand": "source.terraform"
+                    }
+                ]
+            }
+        ]
+    }
+]

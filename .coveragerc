@@ -1,0 +1,85 @@
+[run]
+# Coverage.py configuration for Terraform Sublime Text plugin
+
+# Source packages
+source = .
+omit = 
+    */tests/*
+    */test_*
+    */__pycache__/*
+    */site-packages/*
+    */distutils/*
+    setup.py
+    install.py
+    
+# Use branch coverage
+branch = True
+
+# Parallel mode for CI
+parallel = True
+
+# Context for each test
+dynamic_context = test_function
+
+[report]
+# Reporting options
+precision = 2
+show_missing = True
+skip_covered = False
+sort = Cover
+
+# Exclude patterns
+exclude_lines =
+    # Standard pragmas
+    pragma: no cover
+    
+    # Debug code
+    def __repr__
+    if self\.debug
+    
+    # Defensive programming
+    raise AssertionError
+    raise NotImplementedError
+    
+    # Non-runnable code
+    if 0:
+    if False:
+    if __name__ == .__main__.:
+    
+    # Abstract methods
+    @(abc\.)?abstractmethod
+    
+    # Type checking
+    if TYPE_CHECKING:
+    @overload
+    
+    # Platform-specific code
+    if sys\.platform
+    
+    # Sublime-specific code that can't be tested
+    def plugin_loaded
+    def plugin_unloaded
+
+# Ignore errors
+ignore_errors = True
+
+[html]
+# HTML report directory
+directory = tests/htmlcov
+title = Terraform Sublime Plugin Coverage Report
+show_contexts = True
+
+[xml]
+# XML report for CI
+output = coverage.xml
+
+[paths]
+# Path equivalence for different environments
+source =
+    Terraform/
+    */Terraform/
+    
+[context]
+# Context labeling
+# This helps identify which tests cover which code
+dynamic_context = test_function

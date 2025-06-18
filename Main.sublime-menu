@@ -1,0 +1,167 @@
+[
+    {
+        "id": "tools",
+        "children": [
+            {
+                "caption": "-"
+            },
+            {
+                "caption": "Terraform",
+                "id": "terraform",
+                "children": [
+                    {
+                        "caption": "Initialize",
+                        "command": "terraform_init"
+                    },
+                    {
+                        "caption": "Initialize Current Folder",
+                        "command": "terraform_init_current_folder"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Validate",
+                        "command": "terraform_validate"
+                    },
+                    {
+                        "caption": "Plan",
+                        "command": "terraform_plan"
+                    },
+                    {
+                        "caption": "Apply",
+                        "command": "terraform_apply"
+                    },
+                    {
+                        "caption": "Destroy",
+                        "command": "terraform_destroy"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Format Document",
+                        "command": "terraform_format"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Show Output",
+                        "command": "terraform_output"
+                    },
+                    {
+                        "caption": "Refresh State",
+                        "command": "terraform_refresh"
+                    },
+                    {
+                        "caption": "Show State",
+                        "command": "terraform_show"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Module Explorer",
+                        "children": [
+                            {
+                                "caption": "Show Modules",
+                                "command": "terraform_show_modules"
+                            },
+                            {
+                                "caption": "Show Providers",
+                                "command": "terraform_show_providers"
+                            },
+                            {
+                                "caption": "Show Resources",
+                                "command": "terraform_show_resources"
+                            }
+                        ]
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Terraform Cloud",
+                        "children": [
+                            {
+                                "caption": "Login",
+                                "command": "terraform_cloud_login"
+                            },
+                            {
+                                "caption": "Show Workspaces",
+                                "command": "terraform_cloud_show_workspaces"
+                            },
+                            {
+                                "caption": "Show Runs",
+                                "command": "terraform_cloud_show_runs"
+                            },
+                            {
+                                "caption": "-"
+                            },
+                            {
+                                "caption": "Logout",
+                                "command": "terraform_cloud_logout"
+                            }
+                        ]
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Project",
+                        "children": [
+                            {
+                                "caption": "Show Status",
+                                "command": "terraform_project_status"
+                            },
+                            {
+                                "caption": "Refresh Projects",
+                                "command": "terraform_project_refresh"
+                            },
+                            {
+                                "caption": "Switch Project",
+                                "command": "terraform_project_switch"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "preferences",
+        "children": [
+            {
+                "caption": "Package Settings",
+                "id": "package-settings",
+                "children": [
+                    {
+                        "caption": "Terraform",
+                        "children": [
+                            {
+                                "caption": "Settings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/Terraform/Terraform.sublime-settings",
+                                    "default": "{\n\t$0\n}\n"
+                                }
+                            },
+                            {
+                                "caption": "-"
+                            },
+                            {
+                                "caption": "Key Bindings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/Terraform/Default.sublime-keymap",
+                                    "default": "[\n\t$0\n]\n"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

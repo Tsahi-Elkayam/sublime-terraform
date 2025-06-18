@@ -1,0 +1,98 @@
+{
+    "scope": "source.terraform",
+    
+    "completions": [
+        {
+            "trigger": "resource",
+            "contents": "resource \"${1:type}\" \"${2:name}\" {\n\t${3}\n}"
+        },
+        {
+            "trigger": "data",
+            "contents": "data \"${1:type}\" \"${2:name}\" {\n\t${3}\n}"
+        },
+        {
+            "trigger": "variable",
+            "contents": "variable \"${1:name}\" {\n\tdescription = \"${2:description}\"\n\ttype        = ${3:string}\n\tdefault     = ${4:null}\n}"
+        },
+        {
+            "trigger": "output",
+            "contents": "output \"${1:name}\" {\n\tdescription = \"${2:description}\"\n\tvalue       = ${3}\n}"
+        },
+        {
+            "trigger": "module",
+            "contents": "module \"${1:name}\" {\n\tsource = \"${2:source}\"\n\t\n\t${3}\n}"
+        },
+        {
+            "trigger": "locals",
+            "contents": "locals {\n\t${1:name} = ${2:value}\n}"
+        },
+        {
+            "trigger": "provider",
+            "contents": "provider \"${1:name}\" {\n\t${2}\n}"
+        },
+        {
+            "trigger": "terraform",
+            "contents": "terraform {\n\trequired_version = \">= ${1:1.0}\"\n\t\n\trequired_providers {\n\t\t${2:provider} = {\n\t\t\tsource  = \"${3:source}\"\n\t\t\tversion = \"${4:version}\"\n\t\t}\n\t}\n}"
+        },
+        {
+            "trigger": "backend",
+            "contents": "backend \"${1:type}\" {\n\t${2}\n}"
+        },
+        {
+            "trigger": "for",
+            "contents": "for ${1:item} in ${2:list} : ${3:expression}"
+        },
+        {
+            "trigger": "for_each",
+            "contents": "for_each = ${1:var.items}\n\n${2:key} = each.key\n${3:value} = each.value"
+        },
+        {
+            "trigger": "count",
+            "contents": "count = ${1:var.count}\n\n${2:attribute} = count.index"
+        },
+        {
+            "trigger": "condition",
+            "contents": "${1:condition} ? ${2:true_value} : ${3:false_value}"
+        },
+        {
+            "trigger": "dynamic",
+            "contents": "dynamic \"${1:block}\" {\n\tfor_each = ${2:var.items}\n\t\n\tcontent {\n\t\t${3}\n\t}\n}"
+        },
+        {
+            "trigger": "lifecycle",
+            "contents": "lifecycle {\n\tcreate_before_destroy = ${1:true}\n\tprevent_destroy       = ${2:false}\n\tignore_changes        = [${3}]\n}"
+        },
+        {
+            "trigger": "depends_on",
+            "contents": "depends_on = [\n\t${1:resource.name}\n]"
+        },
+        {
+            "trigger": "provisioner",
+            "contents": "provisioner \"${1:type}\" {\n\t${2}\n}"
+        },
+        {
+            "trigger": "connection",
+            "contents": "connection {\n\ttype     = \"${1:ssh}\"\n\tuser     = \"${2:username}\"\n\thost     = ${3:self.public_ip}\n\tprivate_key = ${4:file(\"~/.ssh/id_rsa\")}\n}"
+        },
+        {
+            "trigger": "tags",
+            "contents": "tags = {\n\tName        = \"${1:name}\"\n\tEnvironment = \"${2:dev}\"\n\tProject     = \"${3:project}\"\n}"
+        },
+        {
+            "trigger": "validation",
+            "contents": "validation {\n\tcondition     = ${1:condition}\n\terror_message = \"${2:error message}\"\n}"
+        },
+        {
+            "trigger": "moved",
+            "contents": "moved {\n\tfrom = ${1:module.old}\n\tto   = ${2:module.new}\n}"
+        },
+        {
+            "trigger": "import",
+            "contents": "import {\n\tid = \"${1:resource-id}\"\n\tto = ${2:resource.name}\n}"
+        },
+        {
+            "trigger": "check",
+            "contents": "check \"${1:name}\" {\n\tassert {\n\t\tcondition     = ${2:condition}\n\t\terror_message = \"${3:error message}\"\n\t}\n}"
+        }
+    ]
+}

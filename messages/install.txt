@@ -1,0 +1,62 @@
+Terraform Plugin for Sublime Text 4
+====================================
+
+Thank you for installing the Terraform plugin!
+
+🚀 Getting Started
+------------------
+
+1. INSTALL DEPENDENCIES:
+   
+   Required:
+   - LSP Package (install via Package Control)
+   - Terraform CLI (https://www.terraform.io/downloads)
+   
+   The plugin will automatically download terraform-ls on first use.
+
+2. OPEN A TERRAFORM PROJECT:
+   
+   Open a folder containing .tf files and the plugin will activate automatically.
+
+3. KEY FEATURES:
+   
+   - Auto-completion for resources, providers, and functions
+   - Syntax highlighting for HCL2
+   - Format on save (Ctrl+Shift+F to format manually)
+   - Terraform commands in Command Palette
+   - Go to Definition (F12)
+   - Find References (Shift+F12)
+
+4. TERRAFORM CLOUD:
+   
+   Use "Terraform Cloud: Login" from Command Palette to connect.
+
+📖 Documentation
+----------------
+
+Full documentation: https://github.com/yourusername/sublime-terraform
+
+Settings: Preferences → Package Settings → Terraform → Settings
+
+⚡ Quick Commands
+-----------------
+
+- Ctrl+Shift+P: Open Command Palette, type "Terraform" to see all commands
+- Ctrl+Shift+F: Format current file
+- Ctrl+Shift+V: Validate configuration
+- Ctrl+Shift+I: Initialize project
+- Ctrl+Shift+M: Show modules
+
+🐛 Troubleshooting
+------------------
+
+If you experience issues:
+
+1. Check the console: View → Show Console
+2. Ensure LSP package is installed
+3. Verify terraform is in your PATH
+4. Restart Sublime Text
+
+Report issues: https://github.com/yourusername/sublime-terraform/issues
+
+Enjoy using Terraform with Sublime Text! 🎉

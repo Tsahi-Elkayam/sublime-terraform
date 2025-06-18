@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+.sublime-*
+
+# terraform-ls binary
+bin/
+terraform-ls
+terraform-ls.exe
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Package Control
+package-control.cache/
+package-control.last-run
+
+# Test files
+test/
+tests/
+*.test.tf
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Credentials (never commit these!)
+*.tfrc
+*.tfrc.json
+.terraform.d/
+credentials.json

@@ -1,0 +1,129 @@
+name: Test Failure Report
+description: Report a failing test in the Terraform plugin test suite
+title: "[Test Failure]: "
+labels: ["test", "bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a test failure! This helps us maintain test reliability.
+
+  - type: input
+    id: test-name
+    attributes:
+      label: Failing Test
+      description: Name of the failing test (e.g., test_plugin.TestPlugin.test_plugin_loaded)
+      placeholder: test_module.TestClass.test_method
+    validations:
+      required: true
+
+  - type: dropdown
+    id: test-type
+    attributes:
+      label: Test Type
+      description: What type of test is failing?
+      options:
+        - Unit Test
+        - Integration Test
+        - Performance Test
+        - Syntax Test
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error Output
+      description: Please paste the full error output
+      render: shell
+      placeholder: |
+        ======================================================================
+        FAIL: test_plugin_loaded (test_plugin.TestPlugin)
+        ----------------------------------------------------------------------
+        Traceback (most recent call last):
+          File "tests/test_plugin.py", line 45, in test_plugin_loaded
+            self.assertTrue(result)
+        AssertionError: False is not true
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python Version
+      description: Output of `python --version`
+      placeholder: Python 3.8.10
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Windows 10
+        - Windows 11
+        - macOS 12 (Monterey)
+        - macOS 13 (Ventura)
+        - macOS 14 (Sonoma)
+        - Ubuntu 20.04
+        - Ubuntu 22.04
+        - Other Linux
+    validations:
+      required: true
+
+  - type: textarea
+    id: test-environment
+    attributes:
+      label: Test Environment
+      description: Output of `python tests/setup_test_env.py --check-only`
+      render: shell
+    validations:
+      required: true
+
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Is this a regression?
+      description: Did this test pass in a previous version?
+      options:
+        - "Yes"
+        - "No"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this test failure?
+      placeholder: |
+        1. Clone the repository
+        2. Run `pip install -r requirements-test.txt`
+        3. Run `python tests/run_tests.py test_plugin.TestPlugin.test_plugin_loaded`
+        4. Test fails with AssertionError
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that might help debug this test failure
+      placeholder: |
+        - Only fails when run with other tests
+        - Passes when run in isolation
+        - Started failing after commit abc123
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched for similar test failure reports
+          required: true
+        - label: I have run the test with the latest code from main branch
+          required: true
+        - label: I have included the complete error output
+          required: true

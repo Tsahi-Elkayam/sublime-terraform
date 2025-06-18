@@ -1,0 +1,130 @@
+[
+    // Format document
+    {
+        "keys": ["super+shift+f"],
+        "command": "terraform_format",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            }
+        ]
+    },
+    
+    // Validate
+    {
+        "keys": ["super+shift+v"],
+        "command": "terraform_validate",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            }
+        ]
+    },
+    
+    // Initialize
+    {
+        "keys": ["super+shift+i"],
+        "command": "terraform_init",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            }
+        ]
+    },
+    
+    // Plan
+    {
+        "keys": ["super+shift+p"],
+        "command": "terraform_plan",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            }
+        ]
+    },
+    
+    // Show modules
+    {
+        "keys": ["super+shift+m"],
+        "command": "terraform_show_modules",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            }
+        ]
+    },
+    
+    // Go to definition (F12)
+    {
+        "keys": ["f12"],
+        "command": "lsp_symbol_definition",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            },
+            {
+                "key": "lsp.session_with_capability",
+                "operand": "definitionProvider"
+            }
+        ]
+    },
+    
+    // Peek definition (Option+F12)
+    {
+        "keys": ["alt+f12"],
+        "command": "lsp_hover",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            }
+        ]
+    },
+    
+    // Find references (Shift+F12)
+    {
+        "keys": ["shift+f12"],
+        "command": "lsp_symbol_references",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            },
+            {
+                "key": "lsp.session_with_capability",
+                "operand": "referencesProvider"
+            }
+        ]
+    },
+    
+    // Rename symbol (F2)
+    {
+        "keys": ["f2"],
+        "command": "lsp_symbol_rename",
+        "context": [
+            {
+                "key": "selector",
+                "operator": "equal",
+                "operand": "source.terraform"
+            },
+            {
+                "key": "lsp.session_with_capability",
+                "operand": "renameProvider"
+            }
+        ]
+    }
+]

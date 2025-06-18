@@ -1,0 +1,115 @@
+{
+    // Path to terraform binary
+    // Leave empty to use terraform from PATH
+    "terraform_path": "terraform",
+    
+    // Language Server Configuration
+    "language_server": {
+        // Enable/disable language server
+        "enabled": true,
+        
+        // Path to terraform-ls binary
+        // Leave empty for auto-detection/download
+        "path": "",
+        
+        // Additional arguments for terraform-ls
+        "args": ["serve"],
+        
+        // Log file path (leave empty to disable logging)
+        "log_file": "",
+        
+        // Log level: "trace", "debug", "info", "warn", "error"
+        "log_level": "info"
+    },
+    
+    // Format terraform files on save
+    "format_on_save": true,
+    
+    // Validate terraform files on save
+    "validate_on_save": false,
+    
+    // Experimental features
+    "experimental_features": {
+        // Pre-fill required fields in completion
+        "prefill_required_fields": true,
+        
+        // Enable enhanced validation
+        "validate_on_save": false
+    },
+    
+    // Root module paths (array of paths)
+    // These paths are treated as Terraform root modules
+    "root_modules": [],
+    
+    // Exclude these paths from root module detection
+    "exclude_root_modules": [],
+    
+    // Directory names to ignore when indexing
+    "ignore_directory_names": [
+        ".terraform",
+        "terraform.tfstate.d",
+        ".terragrunt-cache",
+        "node_modules",
+        ".git"
+    ],
+    
+    // Terraform Cloud / HCP Terraform settings
+    "terraform_cloud": {
+        // Default organization (can be overridden)
+        "organization": "",
+        
+        // API token (not recommended - use terraform login instead)
+        "token": ""
+    },
+    
+    // Code lens features
+    "code_lens": {
+        // Show reference counts for resources
+        // Note: This can impact performance on large projects
+        "reference_count": false
+    },
+    
+    // Module explorer settings
+    "module_explorer": {
+        // Show providers in explorer
+        "show_providers": true,
+        
+        // Show modules in explorer
+        "show_modules": true,
+        
+        // Show resources in explorer (can be slow on large files)
+        "show_resources": false
+    },
+    
+    // Completion settings
+    "completion": {
+        // Characters that trigger completion
+        "trigger_characters": [".", "[", "(", ",", " "],
+        
+        // Complete required fields automatically
+        "complete_required_fields": true
+    },
+    
+    // Diagnostics settings
+    "diagnostics": {
+        // Enable terraform validate diagnostics
+        "enable_terraform_validate": true,
+        
+        // Validate when opening files
+        "validate_on_open": false,
+        
+        // Validate on file changes
+        "validate_on_change": true
+    },
+    
+    // Terraform command execution
+    "execution": {
+        // Timeout for terraform commands (seconds)
+        "timeout": 300,
+        
+        // Environment variables for terraform execution
+        "env": {
+            "TF_IN_AUTOMATION": "1"
+        }
+    }
+}
