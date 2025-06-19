@@ -317,9 +317,11 @@ class TerraformOutputCommand(TerraformCommand):
             if items:
                 self.window.show_quick_panel(
                     items,
-                    lambda idx: self.copy_output(list(outputs.keys())[idx], outputs)
-                    if idx >= 0
-                    else None,
+                    lambda idx: (
+                        self.copy_output(list(outputs.keys())[idx], outputs)
+                        if idx >= 0
+                        else None
+                    ),
                 )
             else:
                 sublime.status_message("No outputs found")
